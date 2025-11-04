@@ -8,5 +8,9 @@ Game Tick Number: @game.TickNumber
 
 
 @code {
+    protected override void OnInitialized()
+    {
+        game.GameUpdated += () => InvokeAsync(StateHasChanged);
+    }
     Game game = new Game();
 }
