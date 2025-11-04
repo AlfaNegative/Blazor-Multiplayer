@@ -1,0 +1,12 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+Game Tick Number: @game.TickNumber
+
+<br />
+<button @onclick="game.StartGame">Start Game</button>
+
+
+@code {
+    Game game = new Game();
+}
