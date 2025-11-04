@@ -11,6 +11,7 @@ public class Game
     }
     public void StartGame()
     {
+        if (tickTimer != null) return;
         tickTimer = new System.Timers.Timer(1000);
         tickTimer.Elapsed += DoTick;
         tickTimer.AutoReset = true;
