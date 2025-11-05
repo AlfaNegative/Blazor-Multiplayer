@@ -2,9 +2,12 @@ using System.Timers;
 
 public class Game
 {
+    public readonly Guid Id = Guid.NewGuid();
     public event Action? GameUpdated;
     public int TickNumber { get; set; }
     private System.Timers.Timer? tickTimer = null;
+    public string Player1 { get; set; }
+    public string Player2 { get; set; }
     public void DoTick(object sender, ElapsedEventArgs e)
     {
         TickNumber++;
@@ -21,9 +24,5 @@ public class Game
         tickTimer.Enabled = true;
     }
 
-    // ~Game()
-    // {
-    //     tickTimer?.Stop();
-    //     tickTimer.Dispose();
-    // }
+
 }

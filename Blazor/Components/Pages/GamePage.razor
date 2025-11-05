@@ -1,0 +1,30 @@
+﻿@page "/game/{GameId}/{PlayerNumber}"
+@rendermode InteractiveServer
+
+Game Tick Number: @game.TickNumber
+
+<br />
+<button @onclick="game.StartGame">Start Game</button>
+<br />
+
+
+@code {
+    [Parameter]
+    public string GameId { get; set; }
+    [Parameter]
+    public string PlayerNumber { get; set; }
+    Game game;
+    protected override void OnInitialized()//"constructor for a blazor page"
+    {
+        game = GameManager.Games.First(
+        g => g.Id.ToString() == GameId
+        ) ?? throw new Exception("cannot find game");
+        if(PlayerNumber == "1") {
+            game.Player1 = "1";
+        }
+        if(PlayerNumber == "2"){
+            game.Player2 = "2";
+        }
+        game.GameUpdated += () => InvokeAsync(StateHasChanged);
+    }
+}

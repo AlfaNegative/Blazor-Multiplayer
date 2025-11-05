@@ -1,16 +1,30 @@
-﻿@page "/"
+@page "/"
+@inject NavigationManager navigation
 @rendermode InteractiveServer
 
-Game Tick Number: @game.TickNumber
+<button @onclick="MakeGame">Make Game</button>
 
-<br />
-<button @onclick="game.StartGame">Start Game</button>
+@foreach (Game game in GameManager.Games)
+{
+    @if (game.Player2 == null)
+    {
+        <div>
+            <a href="/game/@game.Id/2">join game</a>
+        </div>
+    }
+}
+
 
 
 @code {
-    protected override void OnInitialized()
+    public void MakeGame()
     {
-        game.GameUpdated += () => InvokeAsync(StateHasChanged);
+
+        Console.WriteLine("making new game");
+        Game newGame = new();
+        GameManager.Games.Add(newGame);
+
+        navigation.NavigateTo($"/game/{newGame.Id}/1");
+
     }
-    Game game = new Game();
 }
