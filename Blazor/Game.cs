@@ -2,6 +2,10 @@ using System.Timers;
 
 public class Game
 {
+    public bool GameIsRunning
+    {
+        get => tickTimer != null;
+    }
     public readonly Guid Id = Guid.NewGuid();
     public event Action? GameUpdated;
     public int TickNumber { get; set; }
@@ -24,5 +28,9 @@ public class Game
         tickTimer.Enabled = true;
     }
 
-
+    public void StopGame()
+    {
+        tickTimer?.Stop();
+        tickTimer?.Dispose();
+    }
 }

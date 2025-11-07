@@ -9,7 +9,26 @@
     @if (game.Player2 == null)
     {
         <div>
-            <a href="/game/@game.Id/2">join game</a>
+            <a href="/game/@game.Id/2">join game @game.Id</a>
+        </div>
+    }
+}
+@* break with a line *@
+<hr />
+
+@* header with 3 size *@
+<h3>Game Stopper Section</h3>
+
+@foreach (Game game in GameManager.Games)
+{
+    @if (game.Player2 == null)
+    {
+        @if (game.GameIsRunning)
+        {
+            <button @onclick="game.StopGame">Stop Game: @game.Id</button>
+        }
+        <div>
+            <a href="/game/@game.Id/2">join game @game.Id</a>
         </div>
     }
 }
