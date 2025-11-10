@@ -1,12 +1,12 @@
 using System.Timers;
 
-public class Game
+public record Game
 {
     public bool GameIsRunning
     {
         get => tickTimer != null;
     }
-    public readonly Guid Id = Guid.NewGuid();
+    public Guid Id { get; init; } = Guid.NewGuid();
     public event Action? GameUpdated;
     public int TickNumber { get; set; }
     private System.Timers.Timer? tickTimer = null;
