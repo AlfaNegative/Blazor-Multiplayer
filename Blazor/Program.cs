@@ -29,20 +29,29 @@
 
 using System.Text.Json;
 
-Game someGame = new();
+Game someGame = new Game();
+someGame.StartGame();
 
 // get a string version of someGame
 
-string someGameJson = JsonSerializer.Serialize(someGame);
+await Task.Delay(3000);
+
+string someGameJson = JsonSerializer.Serialize(GameDTO.GameToDTO(someGame));
+Console.WriteLine("Writing and reading from FS");
 Console.WriteLine(someGameJson);
 
 // File.WriteAllText("game.json", someGameJson);
 
 // File.ReadAllText("game.json");
 
-Game? copyOfGame = JsonSerializer.Deserialize<Game>(someGameJson);
-Console.WriteLine(copyOfGame);
+GameDTO? copyOfGameDTO = JsonSerializer.Deserialize<GameDTO>(someGameJson);
+Game? restoredGame = copyOfGameDTO?.ToGame();
+
+
 // if(copyOfGame == null)
 // {
 //     // failed to parse
 // }
+
+
+// DTO - Data Tranfer Object

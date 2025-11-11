@@ -10,8 +10,8 @@ public record Game
     public event Action? GameUpdated;
     public int TickNumber { get; set; }
     private System.Timers.Timer? tickTimer = null;
-    public string Player1 { get; set; }
-    public string Player2 { get; set; }
+    public string? Player1 { get; set; }
+    public string? Player2 { get; set; }
     public void DoTick(object sender, ElapsedEventArgs e)
     {
         TickNumber++;
